@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Apuntes : MonoBehaviour
@@ -45,7 +46,7 @@ public class Apuntes : MonoBehaviour
         //Debug.Log("UPDATE");
     }
 
-    // Cada un tiempo fijo (en project setings = time) se ejecuta si o si
+    // Cada un tiempo fijo (en project setings/time) se ejecuta si o si
     void FixedUpdate()
     {
         //Debug.Log("FIXEDUPDATE");
@@ -60,5 +61,39 @@ public class Apuntes : MonoBehaviour
     private void Locura()
     {
         Debug.Log("Hola mundo");
+    }
+
+    //Se ejecuta el primer frame en el que entran en contacto dos colliders diferentes que no esten emparentados (a no ser que tenga rigidbody)
+    private void OnCollisionEnter(Collision col)
+    {
+        
+    }
+
+    //Se ejecuta el frame de despues de que dejen de tocarse
+    private void OnCollisionExit(Collision col)
+    {
+        
+    }
+
+    //Se ejecuta cada frame en que estè en contacto con otro collider SI HAY CAMBIOS
+    private void OnCollisionStay(Collision col)
+    {
+        
+    }
+
+    //Igual que los collisions pero el parametro se llama collider
+    private void OnTriggerEnter(Collider col)
+    {
+        
+    }
+
+    private void OnTriggerExit(Collider col)
+    {
+        
+    }
+
+    private void OnTriggerStay(Collider col)
+    {
+        
     }
 }

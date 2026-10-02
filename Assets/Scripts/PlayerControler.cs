@@ -2,16 +2,21 @@ using UnityEngine;
 
 public class PlayerControler : MonoBehaviour
 {
-    [SerializeField]
-    private float speed;
+    [SerializeField] private float speed;
     private Rigidbody rb;
-    [SerializeField]
-    private float jumpForce;
+    [SerializeField] private float jumpForce;
+    private bool isGrounded=true;
+    [SerializeField] private GameObject tochitosPrefab;
+
+    [SerializeField] private int totalCoins;
+    [SerializeField] private int totalLives = 5;
+    private Vector3 startPos;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        startPos = transform.position;
     }
 
     // Update is called once per frame
@@ -29,9 +34,62 @@ public class PlayerControler : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 180, 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce);
+            isGrounded = false;
         }
     }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "ground" || col.gameObject.tag == "tocho")
+        {
+            isGrounded = true;
+        }
+
+        if (col.gameObject.tag == "tocho")
+        {
+            if (col.GetContact(0).normal == Vector3.down)
+            {
+                //instantiate (objeto a instanciar, posicion, rotacion, (opcional) el transform del padre)
+                GameObject clone = Instantiate(tochitosPrefab, col.transform.position, col.transform.rotation);
+                Destroy(col.gameObject);
+                Destroy(clone, 3);
+            }
+        }
+
+        if (col.gameObject.tag == "plataform")
+        {
+            transform.parent = col.transform;
+            isGrounded = true;
+
+        }
+    }
+
+    private void OnCollisionExit(Collision col)
+    {
+        if (col.gameObject.tag == "plataform")
+        {
+            transform.parent = null;
+        }
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "coin")
+        {
+            Destroy(col.gameObject);
+            totalCoins += 1;
+            Debug.Log(totalCoins);
+        }
+
+        if (col.gameObject.tag == "muerte")
+        {
+            //quitamos 1 vida
+            totalLives -= 1;
+            transform.position = startPos;
+        }
+    }
+    
 }
