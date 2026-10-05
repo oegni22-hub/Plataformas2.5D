@@ -8,14 +8,15 @@ public class PlayerControler : MonoBehaviour
     private bool isGrounded=true;
     [SerializeField] private GameObject tochitosPrefab;
 
-    [SerializeField] private int totalCoins;
-    [SerializeField] private int totalLives = 5;
     private Vector3 startPos;
+
+    private LevelManager lm;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        lm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         startPos = transform.position;
     }
 
@@ -63,7 +64,6 @@ public class PlayerControler : MonoBehaviour
         {
             transform.parent = col.transform;
             isGrounded = true;
-
         }
     }
 
@@ -80,15 +80,28 @@ public class PlayerControler : MonoBehaviour
         if (col.gameObject.tag == "coin")
         {
             Destroy(col.gameObject);
-            totalCoins += 1;
-            Debug.Log(totalCoins);
+            GameManager.instance.gameData.totalCoins += 1;
+            lm.UpdateCoinsText();
         }
 
         if (col.gameObject.tag == "muerte")
         {
             //quitamos 1 vida
-            totalLives -= 1;
-            transform.position = startPos;
+            GameManager.instance.gameData.totalLives -= 1;
+            if (GameManager.instance.gameData.totalLives < 0)
+            {
+                lm.ActivatePanelGameOver();
+            }
+            else
+            {
+                transform.position = startPos;
+                lm.UpdateLivesText();
+            }
+        }
+
+        if (col.gameObject.tag == "meta")
+        {
+            lm.ActivatePanelWin();
         }
     }
     
