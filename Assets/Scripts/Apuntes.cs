@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Apuntes : MonoBehaviour
 {
-    //accesibilidad (public/private), tipo de variable, nombre de la variable, (Opcional) valor
+    /*//accesibilidad (public/private), tipo de variable, nombre de la variable, (Opcional) valor
     private bool boleano = true; // bool = puede ser o true o false (1 o 0)
     public int numEntero = 5; // int = numeros enteros
     [SerializeField] //Aparece en el inspector pero no es publica
@@ -60,7 +60,7 @@ public class Apuntes : MonoBehaviour
 
     private void Locura()
     {
-        Debug.Log("Hola mundo");
+        //Debug.Log("Hola mundo");
     }
 
     //Se ejecuta el primer frame en el que entran en contacto dos colliders diferentes que no esten emparentados (a no ser que tenga rigidbody)
@@ -95,5 +95,5 @@ public class Apuntes : MonoBehaviour
     private void OnTriggerStay(Collider col)
     {
         
-    }
+    }*/
 }

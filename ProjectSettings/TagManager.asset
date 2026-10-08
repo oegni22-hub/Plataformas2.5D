@@ -10,6 +10,8 @@ TagManager:
   - muerte
   - plataform
   - meta
+  - limiteEnemigo
+  - enemy
   layers:
   - Default
   - TransparentFX
@@ -17,8 +19,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - DetectionArea
+  - EnemyLimit
   - 
   - 
   - 

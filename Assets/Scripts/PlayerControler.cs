@@ -7,6 +7,7 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private float jumpForce;
     private bool isGrounded=true;
     [SerializeField] private GameObject tochitosPrefab;
+    [SerializeField] private GameObject moneda;
 
     private Vector3 startPos;
 
@@ -31,7 +32,7 @@ public class PlayerControler : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(Vector3.back * speed * Time.deltaTime, Space.World);
+            transform.Translate(Vector3.back * speed*Time.deltaTime, Space.World);
             transform.eulerAngles = new Vector3(0, 180, 0);
         }
 
@@ -56,7 +57,8 @@ public class PlayerControler : MonoBehaviour
                 //instantiate (objeto a instanciar, posicion, rotacion, (opcional) el transform del padre)
                 GameObject clone = Instantiate(tochitosPrefab, col.transform.position, col.transform.rotation);
                 Destroy(col.gameObject);
-                Destroy(clone, 3);
+                Destroy(clone, 3); 
+                Instantiate(moneda, col.transform.position, col.transform.rotation);
             }
         }
 
@@ -64,6 +66,25 @@ public class PlayerControler : MonoBehaviour
         {
             transform.parent = col.transform;
             isGrounded = true;
+        }
+
+        if (col.gameObject.tag == "enemy")
+        {
+            if (col.GetContact(0).normal.y > 0.5f)
+            {
+                Destroy(col.gameObject);
+                Instantiate(moneda, col.transform.position, col.transform.rotation);
+                rb.AddForce(Vector3.up * jumpForce * 0.5f);
+            }
+            else
+            {
+                MuertePlayer();
+            }
+        }
+
+        if (col.gameObject.tag == "meta")
+        {
+            lm.FinishLevel();
         }
     }
 
@@ -86,22 +107,22 @@ public class PlayerControler : MonoBehaviour
 
         if (col.gameObject.tag == "muerte")
         {
-            //quitamos 1 vida
-            GameManager.instance.gameData.totalLives -= 1;
-            if (GameManager.instance.gameData.totalLives < 0)
-            {
-                lm.ActivatePanelGameOver();
-            }
-            else
-            {
-                transform.position = startPos;
-                lm.UpdateLivesText();
-            }
+            MuertePlayer();
         }
+    }
 
-        if (col.gameObject.tag == "meta")
+    private void MuertePlayer()
+    {
+        //quitamos 1 vida
+        GameManager.instance.gameData.totalLives -= 1;
+        if (GameManager.instance.gameData.totalLives < 0)
         {
-            lm.ActivatePanelWin();
+            lm.ActivatePanelGameOver();
+        }
+        else
+        {
+            transform.position = startPos;
+            lm.UpdateLivesText();
         }
     }
     
