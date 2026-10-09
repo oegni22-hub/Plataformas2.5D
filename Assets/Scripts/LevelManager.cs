@@ -6,6 +6,7 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private Text coinsText, livesText;
     [SerializeField] private GameObject panelGameOver, panelWin;
+    [SerializeField] private AudioClip music;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -13,6 +14,8 @@ public class LevelManager : MonoBehaviour
         UpdateCoinsText();
         UpdateLivesText();
         Time.timeScale = 1;
+        AudioManager.instance.PlayMusic(music);
+        AudioManager.instance.StopSFX();
     }
 
     // Update is called once per frame
@@ -40,6 +43,8 @@ public class LevelManager : MonoBehaviour
 
     public void MainMenuButton()
     {
+        AudioManager.instance.StopSFX();
+        GameManager.instance.gameData.totalLives = 3;
         SceneManager.LoadScene(0);
     }
     
@@ -52,6 +57,7 @@ public class LevelManager : MonoBehaviour
 
     public void NextLevelButton()
     {
+        GameManager.instance.gameData.totalLives = 3;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         //SceneManager.LoadScene(NextLevelName); //Si los niveles no tienen un orden
     }

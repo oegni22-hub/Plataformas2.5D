@@ -13,6 +13,8 @@ public class PlayerControler : MonoBehaviour
 
     private LevelManager lm;
     
+    [SerializeField] private AudioClip jumpSound, coinSound, deathSound, winSound, enemyDeathSound;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,6 +42,7 @@ public class PlayerControler : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce);
             isGrounded = false;
+            AudioManager.instance.PlaySFX(jumpSound);
         }
     }
 
@@ -58,7 +61,7 @@ public class PlayerControler : MonoBehaviour
                 GameObject clone = Instantiate(tochitosPrefab, col.transform.position, col.transform.rotation);
                 Destroy(col.gameObject);
                 Destroy(clone, 3); 
-                Instantiate(moneda, col.transform.position, col.transform.rotation);
+                Instantiate(moneda, new Vector3(col.transform.position.x, col.transform.position.y + 1, col.transform.position.z), moneda.transform.rotation);
             }
         }
 
@@ -73,8 +76,9 @@ public class PlayerControler : MonoBehaviour
             if (col.GetContact(0).normal.y > 0.5f)
             {
                 Destroy(col.gameObject);
-                Instantiate(moneda, col.transform.position, col.transform.rotation);
+                Instantiate(moneda, new Vector3(col.transform.position.x, col.transform.position.y + 1, col.transform.position.z), moneda.transform.rotation);
                 rb.AddForce(Vector3.up * jumpForce * 0.5f);
+                AudioManager.instance.PlaySFX(enemyDeathSound);
             }
             else
             {
@@ -85,6 +89,8 @@ public class PlayerControler : MonoBehaviour
         if (col.gameObject.tag == "meta")
         {
             lm.FinishLevel();
+            AudioManager.instance.PlaySFX(winSound);
+            AudioManager.instance.StopMusic();
         }
     }
 
@@ -103,6 +109,7 @@ public class PlayerControler : MonoBehaviour
             Destroy(col.gameObject);
             GameManager.instance.gameData.totalCoins += 1;
             lm.UpdateCoinsText();
+            AudioManager.instance.PlaySFX(coinSound);
         }
 
         if (col.gameObject.tag == "muerte")
@@ -115,6 +122,7 @@ public class PlayerControler : MonoBehaviour
     {
         //quitamos 1 vida
         GameManager.instance.gameData.totalLives -= 1;
+        AudioManager.instance.PlaySFX(deathSound);
         if (GameManager.instance.gameData.totalLives < 0)
         {
             lm.ActivatePanelGameOver();

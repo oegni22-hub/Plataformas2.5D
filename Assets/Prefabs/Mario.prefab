@@ -360,6 +360,11 @@ MonoBehaviour:
   jumpForce: 400
   tochitosPrefab: {fileID: 3848142531956567450, guid: 504a4887e96b34c4c8be16c726b64d7c, type: 3}
   moneda: {fileID: 2691263948586422735, guid: aa04dac288dfa3041a648d6abaa3978a, type: 3}
+  jumpSound: {fileID: 8300000, guid: a5d6ad88bebfa0d4081785a5e12342cb, type: 3}
+  coinSound: {fileID: 8300000, guid: fb3c7c905f401494ebf4120f7d6355f9, type: 3}
+  deathSound: {fileID: 8300000, guid: 162d00317d01383458b26b271bfbcbd0, type: 3}
+  winSound: {fileID: 8300000, guid: 4515eec525d89cf4f8ea1c34f353aa6a, type: 3}
+  enemyDeathSound: {fileID: 8300000, guid: 33b42cf392ef7c04394f2157f64ad059, type: 3}
 --- !u!54 &4275564847436360121
 Rigidbody:
   m_ObjectHideFlags: 0
