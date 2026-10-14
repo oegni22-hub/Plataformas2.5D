@@ -200,8 +200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba7e5b76b7b5ea840a4854cf53b86381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  tonto: 1
+  tonto: 0
   moveSpeed: 3
+  vida: 1
+  moneda: {fileID: 2691263948586422735, guid: aa04dac288dfa3041a648d6abaa3978a, type: 3}
+  enemyDeathSound: {fileID: 8300000, guid: 33b42cf392ef7c04394f2157f64ad059, type: 3}
 --- !u!135 &6324028808785554617
 SphereCollider:
   m_ObjectHideFlags: 0

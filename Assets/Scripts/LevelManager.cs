@@ -53,6 +53,7 @@ public class LevelManager : MonoBehaviour
         GameManager.instance.gameData.totalLives = 3;
         GameManager.instance.gameData.totalCoins = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
     }
 
     public void NextLevelButton()
@@ -65,6 +66,7 @@ public class LevelManager : MonoBehaviour
     public void ActivatePanelGameOver()
     {
         panelGameOver.SetActive(true);
+        Time.timeScale = 0;
     }
     
     public void FinishLevel()

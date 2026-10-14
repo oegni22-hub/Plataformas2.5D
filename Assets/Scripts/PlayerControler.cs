@@ -13,7 +13,7 @@ public class PlayerControler : MonoBehaviour
 
     private LevelManager lm;
     
-    [SerializeField] private AudioClip jumpSound, coinSound, deathSound, winSound, enemyDeathSound;
+    [SerializeField] private AudioClip jumpSound, coinSound, deathSound, winSound;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -75,10 +75,8 @@ public class PlayerControler : MonoBehaviour
         {
             if (col.GetContact(0).normal.y > 0.5f)
             {
-                Destroy(col.gameObject);
-                Instantiate(moneda, new Vector3(col.transform.position.x, col.transform.position.y + 1, col.transform.position.z), moneda.transform.rotation);
+                col.gameObject.SendMessage("MenysVida");
                 rb.AddForce(Vector3.up * jumpForce * 0.5f);
-                AudioManager.instance.PlaySFX(enemyDeathSound);
             }
             else
             {

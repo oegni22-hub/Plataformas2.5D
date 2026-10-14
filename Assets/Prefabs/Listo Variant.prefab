@@ -241,4 +241,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   tonto: 0
+  duro: 1
   moveSpeed: 3
+  vida: 2
+  moneda: {fileID: 2691263948586422735, guid: aa04dac288dfa3041a648d6abaa3978a, type: 3}
+  enemyDeathSound: {fileID: 8300000, guid: 33b42cf392ef7c04394f2157f64ad059, type: 3}
