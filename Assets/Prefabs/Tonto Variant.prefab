@@ -87,7 +87,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4047972025199878, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.52
+      value: -5.06
       objectReference: {fileID: 0}
     - target: {fileID: 4047972025199878, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
       propertyPath: m_LocalPosition.z
@@ -149,6 +149,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -67.609
       objectReference: {fileID: 0}
+    - target: {fileID: 4358697761044548, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.37
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 95457531584545886, guid: 928a1377c1cd4515b208fef3a396b8ea, type: 3}
     m_RemovedGameObjects: []
@@ -192,7 +196,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0.44, z: 0}
+  m_Center: {x: 0, y: 0.52, z: 0}
 --- !u!54 &2702812009604612308
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -233,6 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   tonto: 1
+  duro: 0
   moveSpeed: 3
   vida: 1
   moneda: {fileID: 2691263948586422735, guid: aa04dac288dfa3041a648d6abaa3978a, type: 3}

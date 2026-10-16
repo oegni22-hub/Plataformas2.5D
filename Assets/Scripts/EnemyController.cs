@@ -10,6 +10,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private int vida;
     [SerializeField] private GameObject moneda;
     [SerializeField] private AudioClip enemyDeathSound;
+    private bool timer;
+    private float time;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -24,6 +26,18 @@ public class EnemyController : MonoBehaviour
         if (playerDetected)
         {
             transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
+        }
+
+        if (timer == true)
+        {
+            time += Time.deltaTime;
+        }
+
+        if (time > 1)
+        {
+            timer = false;
+            time = 0;
+            gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.x, gameObject.transform.localScale.z);
         }
     }
 
@@ -52,12 +66,17 @@ public class EnemyController : MonoBehaviour
         {
             transform.localScale = new Vector3(1, 1, 1);
             moveSpeed += 2;
+            gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y * 0.5f, gameObject.transform.localScale.z);
+            timer = true;
         }
         if (vida <= 0)
         {
-            Destroy(gameObject);
+            gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y * 0.5f, gameObject.transform.localScale.z);
+            Destroy(gameObject, 0.5f);
             Instantiate(moneda, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), moneda.transform.rotation);
             AudioManager.instance.PlaySFX(enemyDeathSound);
+            moveSpeed = 0;
+            gameObject.tag = "Untagged";
         }
     }
 }

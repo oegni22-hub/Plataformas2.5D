@@ -58,7 +58,10 @@ public class LevelManager : MonoBehaviour
 
     public void NextLevelButton()
     {
-        GameManager.instance.gameData.totalLives = 3;
+        if (GameManager.instance.gameData.totalLives <= 3)
+        {
+            GameManager.instance.gameData.totalLives = 3;
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         //SceneManager.LoadScene(NextLevelName); //Si los niveles no tienen un orden
     }
