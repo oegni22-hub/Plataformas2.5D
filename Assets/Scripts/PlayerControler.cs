@@ -44,6 +44,12 @@ public class PlayerControler : MonoBehaviour
             isGrounded = false;
             AudioManager.instance.PlaySFX(jumpSound);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Time.timeScale = 0;
+            lm.ActivatePanelPause();
+        }
     }
 
     private void OnCollisionEnter(Collision col)

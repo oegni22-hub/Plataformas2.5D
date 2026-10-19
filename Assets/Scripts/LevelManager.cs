@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private Text coinsText, livesText;
-    [SerializeField] private GameObject panelGameOver, panelWin;
+    [SerializeField] private GameObject panelGameOver, panelWin, panelPause;
     [SerializeField] private AudioClip music;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -65,11 +65,22 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         //SceneManager.LoadScene(NextLevelName); //Si los niveles no tienen un orden
     }
+
+    public void ContinueButton()
+    {
+        Time.timeScale = 1;
+        panelPause.SetActive(false);
+    }
     
     public void ActivatePanelGameOver()
     {
         panelGameOver.SetActive(true);
         Time.timeScale = 0;
+    }
+
+    public void ActivatePanelPause()
+    {
+        panelPause.SetActive(true);
     }
     
     public void FinishLevel()
